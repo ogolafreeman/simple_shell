@@ -36,7 +36,7 @@ int _atoi(char *t)
 	int j, sign = 1, flags = 0, outp;
 	unsigned int rslt = 0;
 
-	for (i = 0;  t[j] != '\0' && flags != 2; i++)
+	for (j = 0;  t[j] != '\0' && flags != 2; j++)
 	{
 		if (t[j] == '-')
 			sign *= -1;

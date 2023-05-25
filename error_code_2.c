@@ -43,7 +43,7 @@ int print_d(int input, int fd)
 	current = _abs_;
 	for (j = 1000000000; j > 1; j /= 10)
 	{
-		if (_abs_ / i)
+		if (_abs_ / j)
 		{
 			__putchar('0' + current / j);
 			count++;
@@ -130,7 +130,7 @@ void remove_comments(char *buf)
 	int x;
 
 	for (x = 0; buf[x] != '\0'; x++)
-		if (buf[x] == '#' && (!i || buf[x - 1] == ' '))
+		if (buf[x] == '#' && (!x || buf[x - 1] == ' '))
 		{
 			buf[x] = '\0';
 			break;

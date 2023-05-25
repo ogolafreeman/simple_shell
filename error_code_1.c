@@ -38,7 +38,7 @@ int _putfd(char a, int fd)
 	if (a == BUF_FLUSH || j >= WRITE_BUF_SIZE)
 	{
 		write(fd, buf, j);
-		i = 0;
+		j = 0;
 	}
 	if (a != BUF_FLUSH)
 		buf[j++] = a;

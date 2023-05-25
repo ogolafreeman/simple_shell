@@ -1,58 +1,10 @@
 #include "shell.h"
 
 /**
- * _getline - function gets the next line of input from STDIN
- * @info: parameter struct
- * @pointer: address of pointer to buffer, preallocated or NULL
- * @length: size of preallocated ptr buffer if not NULL
- *
- * Return: s
- */
-int _getline(info_t *info, char **pointer, size_t *length)
-{
-	static char buf[READ_BUF_SIZE];
-	static size_t x, len;
-	size_t l;
-	ssize_t u = 0, s = 0;
-	char *q = NULL, *new_p = NULL, *c;
-
-	q = *ptr;
-	if (q && length)
-		s = *length;
-	if (x == len)
-		x = len = 0;
-
-	u = read_buf(info, buf, &len);
-	if (u == -1 || (u == 0 && len == 0))
-		return (-1);
-
-	c = _strchr(buf + x, '\n');
-	l = c ? 1 + (unsigned int)(c - buf) : len;
-	new_p = _realloc(q, s, s ? s + l : l + 1);
-	if (!new_p)
-		return (q ? free(q), -1 : -1);
-
-	if (s)
-		_strncat(new_p, buf + x, l - x);
-	else
-		_strncpy(new_p, buf + x, l - x + 1);
-
-	s += l - x;
-	x = l;
-	p = new_p;
-
-	if (length)
-		*length = s;
-	*pointer = q;
-	return (s);
-}
-
-
-/**
- * input_buf - this buffers chained commands
+ * input_buf - A function buffers chained commands
  * @info: A parameter struct
  * @buf: A address of buffer
- * @len: A address of len var
+ * @len: An address of len var
  *
  * Return: bytes read
  */
@@ -71,7 +23,7 @@ ssize_t input_buf(info_t *info, char **buf, size_t *len)
 #else
 		u = _getline(info, buf, &len_p);
 #endif
-		if (r > 0)
+		if (u > 0)
 		{
 			if ((*buf)[u - 1] == '\n')
 			{
@@ -87,12 +39,12 @@ ssize_t input_buf(info_t *info, char **buf, size_t *len)
 			}
 		}
 	}
-	return (r);
+	return (u);
 }
 
 /**
- * get_input - the gets a line minus the newline
- * @info: parameter struct
+ * get_input - the function gets a line minus the newline
+ * @info: A parameter struct
  *
  * Return: bytes read
  */
@@ -100,22 +52,22 @@ ssize_t get_input(info_t *info)
 {
 	static char *buf;
 	static size_t x, l, len;
-	ssize_t u = 0;
-	char **buf_p = &(info->arg), *q;
+	ssize_t t = 0;
+	char **buf_p = &(info->arg), *p;
 
 	_putchar(BUF_FLUSH);
-	r = input_buf(info, &buf, &len);
-	if (u == -1)
+	t = input_buf(info, &buf, &len);
+	if (t == -1)
 		return (-1);
 	if (len)
 	{
-		j = i;
-		p = buf + i;
+		l = x;
+		p = buf + x;
 
 		check_chain(info, buf, &l, x, len);
 		while (l < len)
 		{
-			if (is_chain(info, buf, &j))
+			if (is_chain(info, buf, &l))
 				break;
 			l++;
 		}
@@ -127,32 +79,79 @@ ssize_t get_input(info_t *info)
 			info->cmd_buf_type = CMD_NORM;
 		}
 
-		*buf_p = q;
-		return (_strlen(q));
+		*buf_p = p;
+		return (_strlen(p));
 	}
 
 	*buf_p = buf;
+	return (t);
+}
+
+/**
+ * read_buf - A function that reads a buffer
+ * @info: parameter struct
+ * @buf: buffer
+ * @j: size
+ *
+ * Return: r
+ */
+ssize_t read_buf(info_t *info, char *buf, size_t *j)
+{
+	ssize_t u = 0;
+
+	if (*j)
+		return (0);
+	u = read(info->readfd, buf, READ_BUF_SIZE);
+	if (u >= 0)
+		*j = u;
 	return (u);
 }
 
 /**
- * read_buf - the function reads a buffer
- * @info: parameter struct
- * @buf: buffer
- * @i: size
+ * _getline - the function gets the next line of input from STDIN
+ * @info: A parameter structure
+ * @pointer: An address of pointer to buffer, preallocated or NULL
+ * @length: A size of preallocated pointer buffer if not NULL
  *
- * Return: r
+ * Return: s
  */
-ssize_t read_buf(info_t *info, char *buf, size_t *i)
+int _getline(info_t *info, char **pointer, size_t *length)
 {
-	ssize_t u = 0;
+	static char buf[READ_BUF_SIZE];
+	static size_t x, len;
+	size_t m;
+	ssize_t r = 0, s = 0;
+	char *q = NULL, *new_p = NULL, *c;
 
-	if (*i)
-		return (0);
-	u = read(info->readfd, buf, READ_BUF_SIZE);
-	if (r >= 0)
-		*i = u;
-	return (u);
+	q = *pointer;
+	if (q && length)
+		s = *length;
+	if (x == len)
+		x = len = 0;
+
+	r = read_buf(info, buf, &len);
+	if (r == -1 || (r == 0 && len == 0))
+		return (-1);
+
+	c = _strchr(buf + x, '\n');
+	m = c ? 1 + (unsigned int)(c - buf) : len;
+	new_p = _realloc(q, s, s ? s + m : m + 1);
+	if (!new_p)
+		return (q ? free(q), -1 : -1);
+
+	if (s)
+		_strncat(new_p, buf + x, m - x);
+	else
+		_strncpy(new_p, buf + x, m - x + 1);
+
+	s += m - x;
+	x = m;
+	q = new_p;
+
+	if (length)
+		*length = s;
+	*pointer = q;
+	return (s);
 }
 
 /**
@@ -161,7 +160,7 @@ ssize_t read_buf(info_t *info, char *buf, size_t *i)
  *
  * Return: void
  */
-void sigintHandler(__attribute__((unused))int sig_num)
+void sigintHandler(__attribute__((unused)) int sig_num)
 {
 	_puts("\n");
 	_puts("$ ");

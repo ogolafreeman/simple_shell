@@ -26,7 +26,7 @@ int _mycd(info_t *info)
 	{
 		if (!_getenv(info, "OLDPWD="))
 		{
-			_puts(s);
+			_puts(t);
 			_putchar('\n');
 			return (1);
 		}
@@ -83,11 +83,11 @@ int _myexit(info_t *info)
  */
 int _myhelp(info_t *info)
 {
-	char **args_array;
+	char **arg_array;
 
 	arg_array = info->argv;
 	_puts("Function not yet implemented \n");
 	if (0)
-		_puts(*args_array);
+		_puts(*arg_array);
 	return (0);
 }

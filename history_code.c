@@ -119,11 +119,11 @@ int read_history(info_t *info)
 	buf = malloc(sizeof(char) * (fsize + 1));
 	if (!buf)
 		return (0);
-	rdlen = read(fd, buf, fsize);
+	rdlen = read(fld, buf, fsize);
 	buf[fsize] = 0;
 	if (rdlen <= 0)
 		return (free(buf), 0);
-	close(fd);
+	close(fld);
 	for (x = 0; x < fsize; x++)
 		if (buf[x] == '\n')
 		{
@@ -131,7 +131,7 @@ int read_history(info_t *info)
 			build_history_list(info, buf + last, linecount++);
 			last = x + 1;
 		}
-	if (last != i)
+	if (last != x)
 		build_history_list(info, buf + last, linecount++);
 	free(buf);
 	info->histcount = linecount;

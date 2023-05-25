@@ -18,7 +18,7 @@ char *_strncpy(char *fin, char *com, int n)
 		fin[o] = com[o];
 		o++;
 	}
-	if (p < n)
+	if (o < n)
 	{
 		p = o;
 		while (p < n)
