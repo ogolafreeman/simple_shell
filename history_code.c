@@ -75,7 +75,8 @@ int build_history_list(info_t *info, char *buf, int linecount)
 }
 
 /**
- * renumber_history - the function renumbers the history linked list after changes
+ * renumber_history - the function renumbers
+ * the history linked list after changes
  * @info: Structure containing potential arguments.
  *
  * Return: the new histcount
