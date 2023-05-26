@@ -1,11 +1,11 @@
 #include "shell.h"
 
 /**
- * is_chain - The function test if current char in
- * buffer is a chain delimeter
- * @info: the parameter struct
- * @buf: the char buffer
- * @pq: address of current position in buf
+ * is_chain - ahju
+ * buffer is ahj
+ * @info: ahju
+ * @buf: ahju
+ * @pq: ahju
  *
  * Return: 1 if chain delimeter, 0 otherwise
  */
@@ -37,13 +37,13 @@ int is_chain(info_t *info, char *buf, size_t *pq)
 }
 
 /**
- * check_chain - the function checks we should
- * continue chaining based on last status
- * @info: A parameter struct
- * @buf: A char buffer
- * @q: An address of current position in buf
- * @i: A starting position in buf
- * @len: A length of buf
+ * check_chain - ahju
+ * continue ahju
+ * @info: ahju
+ * @buf: Aju
+ * @q: ahju
+ * @i: Ajuh
+ * @len: ahju
  *
  * Return: Void
  */
@@ -72,11 +72,11 @@ void check_chain(info_t *info, char *buf, size_t *q, size_t i, size_t len)
 }
 
 /**
- * replace_alias - this function replaces an aliases
- * in the tokenized string
- * @info: the parameter struct
+ * replace_alias - ahju
+ * in the tahju
+ * @info: ahju
  *
- * Return: 1 if replaced, 0 otherwise
+ * Return: ahju
  */
 int replace_alias(info_t *info)
 {
@@ -144,11 +144,11 @@ int replace_vars(info_t *info)
 }
 
 /**
- * replace_string - the function that replaces string
- * @old: An address of old string
- * @new: a new string
+ * replace_string - ahju
+ * @old: Ahju
+ * @new: ahju
  *
- * Return: 1 if replaced, 0 otherwise
+ * Return: ahju
  */
 int replace_string(char **old, char *new)
 {

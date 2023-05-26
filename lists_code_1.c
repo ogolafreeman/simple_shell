@@ -1,12 +1,11 @@
 #include "shell.h"
 
 /**
- * add_node - the function adds a node to the start of the list
- * @head: an address of pointer to head node
- * @str: A str field of node
- * @num: A node index used by history
- *
- * Return: size of list
+ * add_node - ahju
+ * @head: ahju
+ * @str: ahju
+ * @num: ahju
+ * Return: ahju
  */
 list_t *add_node(list_t **head, const char *str, int num)
 {
@@ -34,11 +33,10 @@ list_t *add_node(list_t **head, const char *str, int num)
 }
 
 /**
- * add_node_end - A function that adds a node to the end of the list
- * @head: An address of pointer to head node
- * @str: str field of node
- * @num: node index used by history
- *
+ * add_node_end - Ahju
+ * @head: Ahju
+ * @str: ahju
+ * @num: ahju
  * Return: size of list
  */
 list_t *add_node_end(list_t **head, const char *str, int num)
@@ -75,10 +73,8 @@ list_t *add_node_end(list_t **head, const char *str, int num)
 }
 
 /**
- * print_list_str - this function prints
- * only the str element of a list_t linked list
- * @d: pointer to first node
- *
+ * print_list_str - ahju
+ * @d: ahju
  * Return: size of list
  */
 size_t print_list_str(const list_t *d)
@@ -96,11 +92,10 @@ size_t print_list_str(const list_t *d)
 }
 
 /**
- * delete_node_at_index - this function deletes node at given index
- * @head: address of pointer to first node
- * @index: index of node to delete
- *
- * Return: 1 on success, 0 on failure
+ * delete_node_at_index - ahju
+ * @head: ahju
+ * @index: ahju
+ * Return: ahju
  */
 int delete_node_at_index(list_t **head, unsigned int index)
 {
@@ -136,9 +131,8 @@ int delete_node_at_index(list_t **head, unsigned int index)
 }
 
 /**
- * free_list - this function frees all nodes of a list
- * @head_ptr: address of pointer to head node
- *
+ * free_list - ahju
+ * @head_ptr: aju
  * Return: void
  */
 void free_list(list_t **head_ptr)
