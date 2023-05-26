@@ -1,58 +1,12 @@
 #include "shell.h"
 
 /**
- * free_list - ahju
- * @head_ptr: ahju
+ * add_node - the function adds a node to the start of the list
+ * @head: an address of pointer to head node
+ * @str: A str field of node
+ * @num: A node index used by history
  *
- * Return: ahju
- */
-void free_list(list_t **head_ptr)
-{
-	list_t *node, *next_node, *head;
-
-	if (!head_ptr || !*head_ptr)
-		return;
-	head = *head_ptr;
-	node = head;
-	while (node)
-	{
-		next_node = node->next;
-		free(node->str);
-		free(node);
-		node = next_node;
-	}
-	*head_ptr = NULL;
-}
-
-
-/**
- * print_list_str - ahju
- * @h: ahjy
- *
- * Return: ahju
- */
-size_t print_list_str(const list_t *h)
-{
-	size_t i = 0;
-
-	while (h)
-	{
-		_puts(h->str ? h->str : "(nil)");
-		_puts("\n");
-		h = h->next;
-		i++;
-	}
-	return (i);
-}
-
-
-/**
- * add_node - ahju
- * @head: ahju
- * @str: ahju
- * @num: ahju
- *
- * Return: ahju
+ * Return: size of list
  */
 list_t *add_node(list_t **head, const char *str, int num)
 {
@@ -80,12 +34,12 @@ list_t *add_node(list_t **head, const char *str, int num)
 }
 
 /**
- * add_node_end - ahju
- * @head: ahju
- * @str: ahju
- * @num: ahju
+ * add_node_end - A function that adds a node to the end of the list
+ * @head: An address of pointer to head node
+ * @str: str field of node
+ * @num: node index used by history
  *
- * Return: ahju
+ * Return: size of list
  */
 list_t *add_node_end(list_t **head, const char *str, int num)
 {
@@ -120,18 +74,38 @@ list_t *add_node_end(list_t **head, const char *str, int num)
 	return (new_node);
 }
 
+/**
+ * print_list_str - this function prints
+ * only the str element of a list_t linked list
+ * @d: pointer to first node
+ *
+ * Return: size of list
+ */
+size_t print_list_str(const list_t *d)
+{
+	size_t x = 0;
+
+	while (d)
+	{
+		_puts(d->str ? d->str : "(nil)");
+		_puts("\n");
+		d = d->next;
+		x++;
+	}
+	return (x);
+}
 
 /**
- * delete_node_at_index - ahju
- * @head: ahju
- * @index: ahju
+ * delete_node_at_index - this function deletes node at given index
+ * @head: address of pointer to first node
+ * @index: index of node to delete
  *
- * Return: ahju
+ * Return: 1 on success, 0 on failure
  */
 int delete_node_at_index(list_t **head, unsigned int index)
 {
 	list_t *node, *prev_node;
-	unsigned int i = 0;
+	unsigned int x = 0;
 
 	if (!head || !*head)
 		return (0);
@@ -145,17 +119,42 @@ int delete_node_at_index(list_t **head, unsigned int index)
 		return (1);
 	}
 	node = *head;
-	do {
-		if (i == index)
+	while (node)
+	{
+		if (x == index)
 		{
 			prev_node->next = node->next;
 			free(node->str);
 			free(node);
 			return (1);
 		}
-		i++;
+		x++;
 		prev_node = node;
 		node = node->next;
-	} while (node);
+	}
 	return (0);
+}
+
+/**
+ * free_list - this function frees all nodes of a list
+ * @head_ptr: address of pointer to head node
+ *
+ * Return: void
+ */
+void free_list(list_t **head_ptr)
+{
+	list_t *node, *next_node, *head;
+
+	if (!head_ptr || !*head_ptr)
+		return;
+	head = *head_ptr;
+	node = head;
+	while (node)
+	{
+		next_node = node->next;
+		free(node->str);
+		free(node);
+		node = next_node;
+	}
+	*head_ptr = NULL;
 }
