@@ -3,7 +3,6 @@
 /**
  * bfree - ahju
  * @pointer: ahju
- *
  * Return: ahju
  */
 int bfree(void **pointer)
