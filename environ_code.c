@@ -1,5 +1,6 @@
 #include "shell.h"
 
+
 /**
  * _myenv - prints the current environment
  * @info: Structure containing potential arguments. Used to maintain
@@ -7,6 +8,7 @@
  * Return: Always 0
  */
 int _myenv(info_t *info)
+
 {
 	print_list_str(info->env);
 	return (0);
@@ -24,13 +26,14 @@ char *_getenv(info_t *info, const char *name)
 	list_t *node = info->env;
 	char *p;
 
-	while (node)
-	{
+	/*do whiel loop*/
+	do{
 		p = starts_with(node->str, name);
+		/*if statement*/
 		if (p && *p)
 			return (p);
 		node = node->next;
-	}
+	}while (node);
 	return (NULL);
 }
 
@@ -43,11 +46,13 @@ char *_getenv(info_t *info, const char *name)
  */
 int _mysetenv(info_t *info)
 {
+	/*if statement*/
 	if (info->argc != 3)
 	{
 		_eputs("Incorrect number of arguements\n");
 		return (1);
 	}
+	/*if statement*/
 	if (_setenv(info, info->argv[1], info->argv[2]))
 		return (0);
 	return (1);
@@ -63,11 +68,13 @@ int _myunsetenv(info_t *info)
 {
 	int i;
 
+	/*if statement*/
 	if (info->argc == 1)
 	{
 		_eputs("Too few arguements.\n");
 		return (1);
 	}
+	/*for loop*/
 	for (i = 1; i <= info->argc; i++)
 		_unsetenv(info, info->argv[i]);
 
@@ -85,8 +92,10 @@ int populate_env_list(info_t *info)
 	list_t *node = NULL;
 	size_t i;
 
+	/*for loop*/
 	for (i = 0; environ[i]; i++)
 		add_node_end(&node, environ[i], 0);
+	/*points to the next pointer*/
 	info->env = node;
 	return (0);
 }
