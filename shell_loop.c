@@ -1,5 +1,39 @@
 #include "shell.h"
 
+
+/**
+ * find_builtin - ahju
+ * @info: ahju
+ * Return: ahju
+ */
+int find_builtin(info_t *info)
+{
+        int i, built_in_ret = -1;
+
+        builtin_table builtintbl[] = {
+                {"exit", _myexit},
+                {"env", _myenv},
+                {"help", _myhelp},
+                {"history", _myhistory},
+                {"setenv", _mysetenv},
+                {"unsetenv", _myunsetenv},
+                {"cd", _mycd},
+                {"alias", _myalias},
+                {NULL, NULL}
+        };
+
+	/*for loop*/
+        for (i = 0; builtintbl[i].type; i++)
+		/*if statement*/
+                if (_strcmp(info->argv[0], builtintbl[i].type) == 0)
+                {
+                        info->line_count++;
+                        built_in_ret = builtintbl[i].func(info);
+                        break;
+                }
+        return (built_in_ret);
+}
+
 /**
  * hsh - ahju
  * @info: ahju
@@ -11,13 +45,16 @@ int hsh(info_t *info, char **av)
 	ssize_t r = 0;
 	int builtin_ret = 0;
 
+	/*whlie loop*/
 	while (r != -1 && builtin_ret != -2)
 	{
 		clear_info(info);
+		/*if statement*/
 		if (interactive(info))
 			_puts("$ ");
 		_eputchar(BUF_FLUSH);
 		r = get_input(info);
+		/*if statement*/
 		if (r != -1)
 		{
 			set_info(info, av);
@@ -31,8 +68,10 @@ int hsh(info_t *info, char **av)
 	}
 	write_history(info);
 	free_info(info, 1);
+	/*if statement*/
 	if (!interactive(info) && info->status)
 		exit(info->status);
+	/*if statement*/
 	if (builtin_ret == -2)
 	{
 		if (info->err_num == -1)
@@ -42,35 +81,6 @@ int hsh(info_t *info, char **av)
 	return (builtin_ret);
 }
 
-/**
- * find_builtin - ahju
- * @info: ahju
- * Return: ahju
- */
-int find_builtin(info_t *info)
-{
-	int i, built_in_ret = -1;
-	builtin_table builtintbl[] = {
-		{"exit", _myexit},
-		{"env", _myenv},
-		{"help", _myhelp},
-		{"history", _myhistory},
-		{"setenv", _mysetenv},
-		{"unsetenv", _myunsetenv},
-		{"cd", _mycd},
-		{"alias", _myalias},
-		{NULL, NULL}
-	};
-
-	for (i = 0; builtintbl[i].type; i++)
-		if (_strcmp(info->argv[0], builtintbl[i].type) == 0)
-		{
-			info->line_count++;
-			built_in_ret = builtintbl[i].func(info);
-			break;
-		}
-	return (built_in_ret);
-}
 
 /**
  * find_cmd - ahju
@@ -83,11 +93,14 @@ void find_cmd(info_t *info)
 	int i, k;
 
 	info->path = info->argv[0];
+	/*if statement*/
 	if (info->linecount_flag == 1)
 	{
 		info->line_count++;
 		info->linecount_flag = 0;
 	}
+
+	/*for loop*/
 	for (i = 0, k = 0; info->arg[i]; i++)
 		if (!is_delim(info->arg[i], " \t\n"))
 			k++;
@@ -95,6 +108,7 @@ void find_cmd(info_t *info)
 		return;
 
 	path = find_path(info, _getenv(info, "PATH="), info->argv[0]);
+	/*if statement*/
 	if (path)
 	{
 		info->path = path;
@@ -102,6 +116,7 @@ void find_cmd(info_t *info)
 	}
 	else
 	{
+		/*id statement*/
 		if ((interactive(info) || _getenv(info, "PATH=")
 			|| info->argv[0][0] == '/') && is_cmd(info, info->argv[0]))
 			fork_cmd(info);
@@ -123,11 +138,13 @@ void fork_cmd(info_t *info)
 	pid_t child_pid;
 
 	child_pid = fork();
+	/*if statement*/
 	if (child_pid == -1)
 	{
 		perror("Error:");
 		return;
 	}
+	/*if statement*/
 	if (child_pid == 0)
 	{
 		if (execve(info->path, info->argv, get_environ(info)) == -1)
@@ -138,9 +155,11 @@ void fork_cmd(info_t *info)
 			exit(1);
 		}
 	}
+	/*else if statement*/
 	else
 	{
 		wait(&(info->status));
+		/*if statement*/
 		if (WIFEXITED(info->status))
 		{
 			info->status = WEXITSTATUS(info->status);
