@@ -1,20 +1,20 @@
 #include "shell.h"
 
 /**
- * _erratoi - converts a string to an integer
- * @s: the string to be converted
- * Return: 0 if no numbers in string, converted number otherwise
- *       -1 on error
+ * _erratoi - ahju
+ * @s: ahju
+ * Return: ahju
  */
 int _erratoi(char *s)
 {
-	int i = 0;
-	unsigned long int result = 0;
+	int i = 0, unsigned long int result = 0;
 
 	if (*s == '+')
-		s++;  /* TODO: why does this make main return 255? */
-	for (i = 0;  s[i] != '\0'; i++)
+		s++;
+	/*for loop*/
+	for (;  s[i] != '\0'; i++)
 	{
+		/*if atatement*/
 		if (s[i] >= '0' && s[i] <= '9')
 		{
 			result *= 10;
@@ -22,6 +22,7 @@ int _erratoi(char *s)
 			if (result > INT_MAX)
 				return (-1);
 		}
+		/*if statement*/
 		else
 			return (-1);
 	}
@@ -29,11 +30,10 @@ int _erratoi(char *s)
 }
 
 /**
- * print_error - prints an error message
- * @info: the parameter & return info struct
- * @estr: string containing specified error type
- * Return: 0 if no numbers in string, converted number otherwise
- *        -1 on error
+ * print_error - ahju
+ * @info: ahju
+ * @estr: ahju
+ * Return:ahju
  */
 void print_error(info_t *info, char *estr)
 {
@@ -47,11 +47,10 @@ void print_error(info_t *info, char *estr)
 }
 
 /**
- * print_d - function prints a decimal (integer) number (base 10)
- * @input: the input
- * @fd: the filedescriptor to write to
- *
- * Return: number of characters printed
+ * print_d - ahju
+ * @input: ahju
+ * @fd: ahju
+ * Return: ahju
  */
 int print_d(int input, int fd)
 {
@@ -59,8 +58,10 @@ int print_d(int input, int fd)
 	int i, count = 0;
 	unsigned int _abs_, current;
 
+	/*if statement*/
 	if (fd == STDERR_FILENO)
 		__putchar = _eputchar;
+	/*if statement*/
 	if (input < 0)
 	{
 		_abs_ = -input;
@@ -70,6 +71,7 @@ int print_d(int input, int fd)
 	else
 		_abs_ = input;
 	current = _abs_;
+	/*if statement*/
 	for (i = 1000000000; i > 1; i /= 10)
 	{
 		if (_abs_ / i)
@@ -86,11 +88,10 @@ int print_d(int input, int fd)
 }
 
 /**
- * convert_number - converter function, a clone of itoa
+ * convert_number - ahju
  * @num: number
  * @base: base
- * @flags: argument flags
- *
+ * @flags: ahju
  * Return: string
  */
 char *convert_number(long int num, int base, int flags)
@@ -101,6 +102,7 @@ char *convert_number(long int num, int base, int flags)
 	char *ptr;
 	unsigned long n = num;
 
+	/*if statement*/
 	if (!(flags & CONVERT_UNSIGNED) && num < 0)
 	{
 		n = -num;
@@ -122,15 +124,15 @@ char *convert_number(long int num, int base, int flags)
 }
 
 /**
- * remove_comments - function replaces first instance of '#' with '\0'
- * @buf: address of the string to modify
- *
+ * remove_comments - ahju
+ * @buf: ahju
  * Return: Always 0;
  */
 void remove_comments(char *buf)
 {
 	int i;
 
+	/*for loop*/
 	for (i = 0; buf[i] != '\0'; i++)
 		if (buf[i] == '#' && (!i || buf[i - 1] == ' '))
 		{
