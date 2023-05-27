@@ -9,6 +9,7 @@ size_t list_len(const list_t *h)
 {
 	size_t i = 0;
 
+	/*while loop*/
 	while (h)
 	{
 		h = h->next;
@@ -29,16 +30,21 @@ char **list_to_strings(list_t *head)
 	char **strs;
 	char *str;
 
+	/*if statement*/
 	if (!head || !i)
 		return (NULL);
 	strs = malloc(sizeof(char *) * (i + 1));
+	/*if statement*/
 	if (!strs)
 		return (NULL);
+	/*for loop*/
 	for (i = 0; node; node = node->next, i++)
 	{
 		str = malloc(_strlen(node->str) + 1);
+		/*if statement*/
 		if (!str)
 		{
+			/*for loop*/
 			for (j = 0; j < i; j++)
 				free(strs[j]);
 			free(strs);
@@ -62,7 +68,7 @@ size_t print_list(const list_t *h)
 {
 	size_t i = 0;
 
-	while (h)
+	/*while loop*/
 	{
 		_puts(convert_number(h->num, 10, 0));
 		_putchar(':');
@@ -71,7 +77,7 @@ size_t print_list(const list_t *h)
 		_puts("\n");
 		h = h->next;
 		i++;
-	}
+	}while (h);
 	return (i);
 }
 
@@ -85,14 +91,15 @@ size_t print_list(const list_t *h)
 list_t *node_starts_with(list_t *node, char *prefix, char c)
 {
 	char *p = NULL;
-
-	while (node)
+	
+	/*do while loop*/
 	{
 		p = starts_with(node->str, prefix);
+		/*if statement*/
 		if (p && ((c == -1) || (*p == c)))
 			return (node);
 		node = node->next;
-	}
+	} while (node);
 	return (NULL);
 }
 
@@ -106,12 +113,14 @@ ssize_t get_node_index(list_t *head, list_t *node)
 {
 	size_t i = 0;
 
-	while (head)
-	{
+	/*do while loop*/
+	do{
+		/*if statements*/
 		if (head == node)
 			return (i);
+		/*points to the next null*/
 		head = head->next;
 		i++;
-	}
+	} while (head);
 	return (-1);
 }

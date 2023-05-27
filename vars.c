@@ -156,7 +156,9 @@ int replace_vars(info_t *info)
  */
 int replace_string(char **old, char *new)
 {
+	/*frees old memory*/
 	free(*old);
+	/*if statement*/
 	*old = new;
 	return (1);
 }
