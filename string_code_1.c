@@ -9,9 +9,11 @@ int _strlen(char *s)
 {
 	int i = 0;
 
+	/*returns 0 if pointer is null*/
 	if (!s)
 		return (0);
 
+	/*while loop*/
 	while (*s++)
 		i++;
 	return (i);
@@ -25,6 +27,7 @@ int _strlen(char *s)
  */
 int _strcmp(char *s1, char *s2)
 {
+	/*while loop*/
 	while (*s1 && *s2)
 	{
 		if (*s1 != *s2)
@@ -32,8 +35,10 @@ int _strcmp(char *s1, char *s2)
 		s1++;
 		s2++;
 	}
+	/*if statement*/
 	if (*s1 == *s2)
 		return (0);
+	/*els statement*/
 	else
 		return (*s1 < *s2 ? -1 : 1);
 }
@@ -46,6 +51,7 @@ int _strcmp(char *s1, char *s2)
  */
 char *starts_with(const char *haystack, const char *needle)
 {
+	/*while statement*/
 	while (*needle)
 		if (*needle++ != *haystack++)
 			return (NULL);
@@ -62,10 +68,13 @@ char *_strcat(char *dest, char *src)
 {
 	char *ret = dest;
 
+	/*while loop*/
 	while (*dest)
 		dest++;
+	/*while loop*/
 	while (*src)
 		*dest++ = *src++;
 	*dest = *src;
+	/*return ret*/
 	return (ret);
 }
