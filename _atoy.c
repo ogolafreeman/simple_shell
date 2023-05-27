@@ -19,7 +19,9 @@ int interactive(info_t *info)
  */
 int is_delim(char c, char *delim)
 {
+	/*while loop*/
 	while (*delim)
+		/*if statement*/
 		if (*delim++ == c)
 			return (1);
 	return (0);
@@ -33,8 +35,10 @@ int is_delim(char c, char *delim)
 
 int _isalpha(int c)
 {
+	/*if statement*/
 	if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
 		return (1);
+	/*if statement*/
 	else
 		return (0);
 }
@@ -50,23 +54,29 @@ int _atoi(char *s)
 	int i, sign = 1, flag = 0, output;
 	unsigned int result = 0;
 
+	/*if statement*/
 	for (i = 0;  s[i] != '\0' && flag != 2; i++)
 	{
+		/*if statement*/
 		if (s[i] == '-')
 			sign *= -1;
 
+		/*if statement*/
 		if (s[i] >= '0' && s[i] <= '9')
 		{
 			flag = 1;
 			result *= 10;
 			result += (s[i] - '0');
 		}
+		/*if statement*/
 		else if (flag == 1)
 			flag = 2;
 	}
 
+	/*if statement*/
 	if (sign == -1)
 		output = -result;
+	/*if statement*/
 	else
 		output = result;
 
